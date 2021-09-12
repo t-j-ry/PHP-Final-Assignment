@@ -1,0 +1,39 @@
+create table users (
+   user_id int primary key auto_increment,
+   firstname varchar(255),
+   lastname varchar(255),
+   downvotes boolean,
+   email varchar(50),
+   password varchar(50)
+);
+
+create table products (
+   product_id int primary key auto_increment,
+   title varchar(255) unique,
+   price DECIMAL(13,2),
+   description varchar(255),
+   picture varchar(255),
+   expiry int,
+   user_id int,
+   INDEX `idx_user` (user_id),
+   CONSTRAINT `fk_user_id`
+   FOREIGN KEY (user_id)
+   REFERENCES users(user_id) ON UPDATE CASCADE
+);
+
+create table user_products_list (
+   pin_id int primary key auto_increment,
+   product_id int,
+   user_id int,
+   title varchar(255),
+   product_author varchar(255),
+   description varchar(255),
+   picture varchar(255),
+   firstname varchar(255),
+   lastname varchar(255),
+   price DECIMAL(13,2),
+   email varchar(50),
+   votes int,
+   pinned boolean,
+   expiry int
+);
